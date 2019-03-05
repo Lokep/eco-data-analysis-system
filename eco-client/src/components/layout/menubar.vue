@@ -28,7 +28,7 @@
                 <el-collapse-item name="1">
                     <template slot="title">
                         <i class="fa fa-bell icon-margin"></i>
-                        <router-link to='' tag="span">实时报警</router-link>
+                        <router-link to='/' tag="span">实时报警</router-link>
                     </template>
                     <div>异常数据实时报警</div>
                     <!-- <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div> -->
@@ -36,7 +36,8 @@
                 <el-collapse-item name="2">
                     <template slot="title">
                         <i class="icon-margin fa fa-database"></i>
-                        数据对比
+                        
+                        <router-link to='/data' tag="span">数据对比</router-link>
                     </template>
                     <div>站点参数对比分析</div>
                     <!-- <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div> -->

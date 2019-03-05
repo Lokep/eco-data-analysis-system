@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
 		
-		<Navbar></Navbar>
-		<Menubar></Menubar>
-		<div class="container">
+		<Navbar v-if="hasDefaultComponent"></Navbar>
+		<Menubar v-if="hasDefaultComponent"></Menubar>
+		<div :class="hasDefaultComponent?'container':'containerWithoutDefault'">
 			<router-view></router-view>
 		</div>
 	</div>
@@ -13,33 +13,38 @@
 import Navbar from './components/layout/navbar'
 import Menubar from './components/layout/menubar'
 export default {
-  name: 'App',
-  data(){
-	  return{
-
-	  }
-  },
-  components:{
-	  Navbar,
-	  Menubar
-  }
+	name: 'App',
+	data(){
+		return{
+			hasDefaultComponent:!this.$route.meta.noDefaultComponent
+		}
+	},
+	components:{
+		Navbar,
+		Menubar
+	}
 }
 </script>
 
 <style>
-#app{
-  	width: 100%;
-    height: auto;
+#app,.containerWithoutDefault{
+	height: auto;
     min-height: 100%;
-    min-height: 100vh;
+	min-height: 100vh;
+	width: 100%;
 	overflow: hidden;
+}
+#app{
 	background-color: #fafbfc;
 }
 .container{
 	max-width: calc( 100% - 180px);
 	width:85%;
 	padding: 60px 0 0 0;
-	
 	float: right;
 }
+.containerWithoutDefault{
+	padding: 0;
+}
+
 </style>

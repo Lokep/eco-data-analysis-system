@@ -49,14 +49,20 @@
 }
 
 
-/* 发现 话题 页面的大标题 */
+/* 标题 */
 
-.common-title {
+.title-lg {
     font-size: 24px;
     line-height: 1.5;
     font-weight: 500;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.title-sm {
+    color: #909399;
+    font-size: 14px;
+    display: inline;
 }
 
 .btn-primary {
@@ -94,6 +100,10 @@
     display: block;
 }
 
+.link-color {
+    color: #409EFF!important;
+}
+
 .hover-in-blue:hover {
     color: #007fff;
 }
@@ -105,4 +115,39 @@
 .icon-margin {
     margin: 0 5px 0 0;
     color: #409EFF;
+}
+
+.padding-vertical {
+    padding: 10px 0;
+}
+
+.padding-horizontal {
+    padding: 0 10px;
+}
+
+.margin-vertical {
+    margin: 10px 0;
+}
+
+.margin-bottom {
+    margin: 0 0 10px 0;
+}
+
+.block-width {
+    width: 75%;
+    padding: 15px 20px;
+    margin: 20px auto;
+}
+
+.fff {
+    background-color: #fff;
+}
+
+.color {
+    color: #ffcd31;
+    /* color: #93d587;
+    color: #8e71c7;
+    color: #CDDB49;
+    color: #F56C6C;
+    color: #409EFF; */
 }

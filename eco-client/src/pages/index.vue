@@ -1,69 +1,104 @@
 <style>
-    .condition{
-        width: 75%;
-        padding: 15px 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        min-height: 150px;
-        margin: 20px auto;
+    .el-row {
+        margin-bottom: 10px;
     }
-    .condition-title{
-        color:#909399;
-        font-size: 14px;
-        display: inline;
+    .el-col:last-child {
+        margin-bottom: 0;
     }
+    .el-col {
+        border-radius: 4px;
+        margin-bottom: 5px;
+    }
+
+    .bg-purple {
+        background: #fff;
+    }
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 200px;
+        padding: 15px;
+    }
+
+
 </style>
 <template>
     <div class="index">
-        <div class="condition">
-            <div>
-                <span class="condition-title">异常类别：</span>
-                <el-select v-model="value" placeholder="请选择" size="small">
-                    <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select>
-                <el-button type="primary" plain size="small">查看</el-button>
-            </div>
-            <div>
-                <span class="condition-title">选择审核参数：</span>
-                <el-checkbox-group v-model="checkboxGroup5" size="small">
-                    <el-checkbox label="备选项1" border></el-checkbox>
-                    <el-checkbox label="备选项2" border></el-checkbox>
-                    <el-checkbox label="备选项3" border></el-checkbox>
-                    <el-checkbox label="备选项4" border></el-checkbox>
-                </el-checkbox-group>
-            </div>
+        
+        <Condition></Condition>
+
+        <div class="result block-width">
+
+            <el-row :gutter="20">
+                <!-- 风速/风向 -->
+                <transition name="el-fade-in-linear">
+                    
+                    <el-col :span="9">
+                        <div class="grid-content bg-purple">
+                            <span class="title-lg">风速/风向</span>
+                        </div>    
+                    </el-col>
+                    
+                </transition>
+                
+                <!-- 地表温度/总辐射 -->
+                <transition name="el-fade-in-linear">
+                    <el-col :span="9"  :offset="6">
+                        <div class="grid-content bg-purple">
+                            <span class="title-lg">地表温度/辐射</span>
+                            
+                        </div>
+                    </el-col>
+                </transition>
+            </el-row>
+            <el-row :gutter="20">
+                <!-- 空气温度 -->
+                <transition name="el-fade-in-linear">
+                    <el-col :span="8" >
+                        <div class="grid-content bg-purple">
+                            <span class="title-lg">气温</span>
+                             
+                        </div>
+                    </el-col>
+                </transition>
+                <!-- 气压 -->
+                <transition name="el-fade-in-linear">
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple">
+                            <span class="title-lg">气压</span>
+                             
+                        </div>
+                    </el-col>
+                </transition>
+                <!-- 雨量/湿度 -->
+                <transition name="el-fade-in-linear">
+                    <el-col :span="8">
+                        <div class="grid-content bg-purple">
+                            <span class="title-lg">雨量/湿度</span>
+                            
+                        </div>
+                    </el-col>
+                </transition>
+            </el-row>
+
         </div>
+
     </div>
 </template>
 <script>
+import Condition from '../components/index/condition'
+
 export default {
     data(){
         return{
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
-            }, {
-                value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
-            }],
-            value: '',
-            checkboxGroup5: [],
-            checked5: false
+            
         }
+    },
+    components:{
+        Condition
+    },
+    methods:{
+        
     }
 }
 </script>
