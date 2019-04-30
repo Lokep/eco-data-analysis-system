@@ -24,7 +24,6 @@
 </style>
 <template>
     <div class="index">
-        
         <Condition></Condition>
 
         <div class="result block-width">
