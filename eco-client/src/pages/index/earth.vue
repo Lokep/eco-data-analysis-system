@@ -1,10 +1,11 @@
 <template>
-  <div id="earth" :style="{width:'100%',height:'300px'}"></div>
+  <div id="earth" :style="{width:'100%',height:'400px'}"></div>
 </template>
+
 <script>
   export default {
     props: {
-      earthInfo: Object
+      earthData: Array
     },
     data() {
       return {}
@@ -14,11 +15,16 @@
     },
     methods: {
       drawLine() {
-        let myChart = this.$echarts.init(document.getElementById('earth'))
+        let myChart = this.$echarts.init(document.getElementById('earth'));
+        let xData = [], yData = [];
+        this.earthData && this.earthData.map(item => {
+          xData.push(item.datetime);
+          yData.push(item.surfaceGroundTemperature);
+        });
         myChart.setOption({
           title: {text: ''},
           xAxis: {
-            data: [0, 5, 10, 15, 20],
+            data: [...xData],
             type: 'category',
             name: '高度',
             boundaryGap: ['5%', '5%'],
@@ -36,7 +42,7 @@
             smooth: true,
             symbol: 'circle',
             symbolSize: 10,
-            data: [this.earthInfo["surfaceGroundTemperature"], this.earthInfo["5cmGroundTemperature"], this.earthInfo["10cmGroundTemperature"], this.earthInfo["15cmGroundTemperature"], this.earthInfo["20cmGroundTemperature"], ],
+            data: [...yData],
             itemStyle: {
               color: '#409EFF',
               barBorderRadius: [10, 10, 10, 10],
@@ -58,7 +64,6 @@
             }
           }],
           tooltip: {
-            formatter: `温度：{c} ℃ <br /> 高度：{b} cm`
           },
           legend: {
             top: 30,
@@ -69,3 +74,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

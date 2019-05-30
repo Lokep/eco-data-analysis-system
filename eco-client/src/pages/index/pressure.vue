@@ -1,10 +1,11 @@
 <template>
-  <div id="earth" :style="{width:'100%',height:'300px'}"></div>
+  <div id="pressure" :style="{width:'100%',height:'400px'}"></div>
 </template>
+
 <script>
   export default {
     props: {
-      earthInfo: Object
+      pressureData: Array
     },
     data() {
       return {}
@@ -14,29 +15,34 @@
     },
     methods: {
       drawLine() {
-        let myChart = this.$echarts.init(document.getElementById('earth'))
+        let myChart = this.$echarts.init(document.getElementById('pressure'));
+        let xData = [], yData = [];
+        this.pressureData && this.pressureData.map(item => {
+          xData.push(item.datetime);
+          yData.push(item.stationPressure);
+        });
         myChart.setOption({
           title: {text: ''},
           xAxis: {
-            data: [0, 5, 10, 15, 20],
+            data: [...xData],
             type: 'category',
-            name: '高度',
+            name: '时间',
             boundaryGap: ['5%', '5%'],
             splitNumber: 5,
             nameGap: 5
           },
           yAxis: {
-            type: 'value',
-            name: '温度',
+            type: 'category',
+            name: '本站气压',
             nameGap: 15
           },
           series: [{
-            name: '温度',
+            name: '本站气压/时间',
             type: 'line',
             smooth: true,
             symbol: 'circle',
             symbolSize: 10,
-            data: [this.earthInfo["surfaceGroundTemperature"], this.earthInfo["5cmGroundTemperature"], this.earthInfo["10cmGroundTemperature"], this.earthInfo["15cmGroundTemperature"], this.earthInfo["20cmGroundTemperature"], ],
+            data: [...yData],
             itemStyle: {
               color: '#409EFF',
               barBorderRadius: [10, 10, 10, 10],
@@ -49,7 +55,7 @@
                 x2: 0,
                 y2: 1,
                 colorStops: [{
-                  offset: 0, color: '#409EFF' // 0% 处的颜色
+                  offset: 0, color: 'green' // 0% 处的颜色
                 }, {
                   offset: 1, color: '#fff' // 100% 处的颜色
                 }],
@@ -58,7 +64,6 @@
             }
           }],
           tooltip: {
-            formatter: `温度：{c} ℃ <br /> 高度：{b} cm`
           },
           legend: {
             top: 30,
@@ -69,3 +74,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

@@ -1,35 +1,42 @@
 <template>
-  <div id="wind" :style="{width:'100%',height:'300px'}"></div>
+  <div id="wind" :style="{width:'100%',height:'400px'}"></div>
 </template>
+
 <script>
   export default {
+    name: "indexWind",
     props: {
-      windInfo: Object
+      windData: Array
     },
     mounted() {
-      this.drawLine();
+      this.drawLine()
     },
     methods: {
       drawLine() {
-        let myChart = this.$echarts.init(document.getElementById('wind'))
+        let myChart = this.$echarts.init(document.getElementById('wind'));
+        let xData = [], yData = [];
+        this.windData && this.windData.map(item => {
+          xData.push(item.datetime);
+          yData.push(item["2minSpeed"]);
+        });
         myChart.setOption({
           title: {text: ''},
           color: '#409EFF',
           xAxis: [{
-            data: [this.windInfo["2minSpeed"], this.windInfo["10minSpeed"]],
+            data: [...xData],
             type: 'category',
-            name: '风速'
+            name: '时间'
           }],
           yAxis: [{
             type: 'category',
-            name: '风向'
+            name: '风速'
           }],
           series: [
             {
               name: '风速/风向',
               type: 'bar',
               barWidth: 10,
-              data: [this.windInfo["2minDirection"], this.windInfo["10minDirection"]],
+              data: [...yData],
               itemStyle: {//#409EFF
                 color: '#409EFF',
                 barBorderRadius: [10, 10, 0, 0],
@@ -47,3 +54,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

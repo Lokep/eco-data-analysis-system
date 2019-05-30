@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import axios from 'axios'
+import axios from 'axios';
 
+axios.defaults.baseURL = '/api';
+axios.defaults.timeout = 10000;
 
 /* 引入默认样式 */
 import '../src/assets/styles/reset.css'

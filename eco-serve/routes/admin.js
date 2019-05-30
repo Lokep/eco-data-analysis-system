@@ -71,4 +71,30 @@ router.delete('/', async (req, res, next) => {
   }
 });
 
+
+router.post('/login', async (req, res, next) => {
+  let sql = `SELECT * FROM ${ADMIN_TABLE} WHERE name = ? and password = ?`,
+    params = [req.body.name, req.body.password],
+    result;
+  result = await db.query(sql, params);
+  if(result.length > 0) {
+    res.send({code: '200', message: '登录成功', data: result})
+  } else {
+    res.send({code: "404", message: "未查询到相关用户信息，请检查输入是否有误"})
+  }
+});
+
+
+// 和上边的添加接口相同
+router.post('/register', async (req, res, next) => {
+  let sql = `INSERT INTO ${ADMIN_TABLE} (id, state, date, name, phone, email, userID, password) VALUES(0, 1, ?, ?, ?, ?, ?, ?)`,
+    params = [req.body.date, req.body.name, req.body.phone, req.body.email, req.body.userID, req.body.password],
+    result = await db.query(sql, params);
+  if(result) {
+    res.send({code: '200', message: '添加成功'})
+  } else {
+    res.send({code: '400', message:'添加失败，请重试'})
+  }
+});
+
 module.exports = router;
