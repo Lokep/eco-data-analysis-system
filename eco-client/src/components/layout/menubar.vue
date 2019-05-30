@@ -45,7 +45,7 @@
                 <el-collapse-item name="3">
                     <template slot="title">
                         <i class="icon-margin fa fa-tags"></i>
-                        查看异常
+                        <router-link to='/error' tag="span">查看异常</router-link>
                     </template>
                     <div>异常数据查看</div>
                 </el-collapse-item>

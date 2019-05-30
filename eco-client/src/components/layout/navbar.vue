@@ -47,8 +47,8 @@
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="修改异常参数界限" placement="bottom-start">            
-                <el-menu-item index="/check" class="link-color">
-                    <router-link to="/check">参数校验</router-link>
+                <el-menu-item index="/checkParams" class="link-color">
+                    <router-link to="/checkParams">参数校验</router-link>
                 </el-menu-item>
             </el-tooltip>
             <el-menu-item index="/showSystem" class="link-color" :plain="true" @click="showSystem">
