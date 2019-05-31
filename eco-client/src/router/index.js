@@ -9,7 +9,7 @@ import checkParams from '@/pages/checkParams'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     mode: 'history',
     routes: [{
         path: '/',
@@ -29,9 +29,12 @@ export default new Router({
         name: 'error',
         component: Error
     }, {
-        path: '/error',
-        name: 'error',
-        component: Error
+        path: '/login',
+        name: 'login',
+        component: Login,
+        meta: {
+            notLogin: true
+        }
     }, {
         path: '/checkParams',
         name: 'checkParams',
@@ -41,3 +44,30 @@ export default new Router({
         }
     }]
 })
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(r => !r.meta.notLogin)) {
+        var data = localStorage.getItem('userinfo');
+        if(data) {
+            var dataObj = JSON.parse(data);
+            if (dataObj && Date.now() - dataObj.date < 2 * 60 * 60 * 1000) {
+                next();
+            } else {
+                alert("信息已过期")
+                next({
+                    path: '/login',
+                    query: {
+                        redirect: to.fullPath
+                    }
+                })
+            }
+        } else {
+            next('/login');
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;

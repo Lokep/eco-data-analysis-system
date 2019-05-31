@@ -73,8 +73,8 @@ router.delete('/', async (req, res, next) => {
 
 
 router.post('/login', async (req, res, next) => {
-  let sql = `SELECT * FROM ${ADMIN_TABLE} WHERE name = ? and password = ?`,
-    params = [req.body.name, req.body.password],
+  let sql = `SELECT * FROM ${ADMIN_TABLE} WHERE phone = ? and password = ?`,
+    params = [req.body.phone, req.body.password],
     result;
   result = await db.query(sql, params);
   if(result.length > 0) {

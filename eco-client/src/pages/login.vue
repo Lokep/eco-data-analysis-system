@@ -59,16 +59,16 @@
             <el-form ref="loginForm" class="login-form fff" label-position="right" status-icon label-width="100px" :model="loginForm" >
                 <h4 class="title-lg padding-vertical">登录</h4>                
                 <el-form-item label="账号" prop="account" :rules="[
-                        { required: true, message: '请输入您的账号', trigger: 'blur' },
-                        { pattern:/(^1[34578]\d{9}$)/i, message: '请正确填写您的账号', trigger: ['blur'] }
-                    ]">
+                        { required: true, message: '请输入您的手机号', trigger: 'blur' },
+                        { pattern:/(^1[34578]\d{9}$)/i, message: '请正确填写您的手机号', trigger: ['blur'] }
+                    ]" placeholder="请输入手机号">
                     <el-input v-model="loginForm.account"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
-                    <el-input v-model="loginForm.password"></el-input>
+                    <el-input v-model="loginForm.password" placeholder="请输入密码"></el-input>
                 </el-form-item>
                 
-                <el-button type="primary" class="show login-btn pointer padding-horizontal">登录</el-button>
+                <el-button type="primary" class="show login-btn pointer padding-horizontal" @click="login">登录</el-button>
             </el-form>
         </div>
     </div>
@@ -103,6 +103,23 @@ export default {
             this.index = i
 
             
+        },
+        login() {
+            this.$axios.post('/admin/login', {
+                phone: this.loginForm.account,
+                password: this.loginForm.password
+            }).then(res => {
+                if(res.data.code === '200') {
+                    this.$message.success(res.data.message);
+                    let userinfo = this.loginForm;
+                    userinfo.date = Date.now();
+                    localStorage.setItem('userinfo', JSON.stringify(userinfo));
+                    let redirect = decodeURIComponent(this.$route.query.redirect || '/');
+                    this.$router.push({
+                        path: redirect
+                    })
+                }
+            })
         }
     }
 }

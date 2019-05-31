@@ -51,9 +51,6 @@
                     <router-link to="/checkParams">参数校验</router-link>
                 </el-menu-item>
             </el-tooltip>
-            <el-menu-item index="/showSystem" class="link-color" :plain="true" @click="showSystem">
-                关于系统
-            </el-menu-item>    
             <el-submenu index="/personl" class="last-nav">
                 <template slot="title">
                     <div class="nav-user">
@@ -61,10 +58,7 @@
                         <span>Lokep</span>
                     </div>    
                 </template>
-                <el-menu-item index="/personal" class="link-color">
-                    <router-link to="/personal" class="linkColor"><i class="fa fa-user icon-margin link-color"></i>个人中心</router-link>
-                </el-menu-item>
-                <el-menu-item index="/quit" class="link-color"><i class="fa fa-sign-out icon-margin link-color"></i>退出</el-menu-item>
+                <el-menu-item index="/login" class="link-color" @click="logout"><i class="fa fa-sign-out icon-margin link-color"></i>退出</el-menu-item>
             </el-submenu>
         </el-menu>
 
@@ -86,6 +80,10 @@ export default {
                 message: 'this system is only used for Wu`s college graduation project',
                 type: 'success'
             });
+        },
+        logout() {
+            localStorage.removeItem("userinfo");
+            this.$router.push('/login')
         }
     }
 }

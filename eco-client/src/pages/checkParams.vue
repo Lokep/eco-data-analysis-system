@@ -54,9 +54,23 @@
       },
       submitParams() {
         if(this.isUpdate) {
-
+          this.$axios.put('/check', this.paramsForm)
+            .then(res => {
+              if(res.data.code === '200') {
+                this.$message.success(res.data.message)
+              } else {
+                this.$message.info(res.data.message)
+              }
+            })
         } else {
-
+          this.$axios.post('/check', this.paramsForm)
+            .then(res => {
+              if(res.data.code === '200') {
+                this.$message.success(res.data.message)
+              } else {
+                this.$message.info(res.data.message)
+              }
+            })
         }
       }
     }

@@ -1,10 +1,13 @@
 <template>
 	<div id="app">
-		
-		<Navbar v-if="hasDefaultComponent"></Navbar>
-		<Menubar v-if="hasDefaultComponent"></Menubar>
-		<div :class="hasDefaultComponent?'container':'containerWithoutDefault'">
-			<router-view></router-view>
+
+		<router-view v-if="$route.meta.notLogin"></router-view>
+		<div v-else>
+			<Navbar v-if="hasDefaultComponent"></Navbar>
+			<Menubar v-if="hasDefaultComponent"></Menubar>
+			<div :class="hasDefaultComponent?'container':'containerWithoutDefault'">
+				<router-view></router-view>
+			</div>
 		</div>
 	</div>
 </template>
